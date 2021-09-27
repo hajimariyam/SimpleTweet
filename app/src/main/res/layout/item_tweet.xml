@@ -21,9 +21,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="0dp"
-        android:layout_toEndOf="@+id/ivProfileImage"
+        android:layout_toEndOf="@+id/tvName"
         tools:text="Mariyam83122090" />
 
     <TextView
@@ -41,12 +41,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="165dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginStart="121dp"
         android:layout_toEndOf="@+id/tvScreenName"
-        android:gravity="end"
-        android:text="13m"
-        android:textAlignment="textEnd" />
+        tools:text="13m" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        tools:text="Mariyam" />
+
 </RelativeLayout>
