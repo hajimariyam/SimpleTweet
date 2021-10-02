@@ -1,18 +1,25 @@
 package com.codepath.apps.restclienttemplate;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +30,8 @@ public class TimelineActivity extends AppCompatActivity {
 
     // tag to keep track of success/failure
     public static final String TAG = "TimelineActivity";
+
+    private final int REQUEST_CODE = 20;
 
     // instance variable to be used in multiple methods
     TwitterClient client;
@@ -64,6 +73,46 @@ public class TimelineActivity extends AppCompatActivity {
         rvTweets.setAdapter(adapter);
 
         populateHomeTimeline();
+    }
+
+    // Override onCreateOptionsMenu method to reference menu_main.xml resource file for inflation of app bar
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        // Boolean, so return true for menu to be displayed
+        return true;
+    }
+
+    // Override onOptionsItemSelected to be notified of and handle clicks on app bar
+    // Use android:onClick in menu_main.xml or onOptionsItemSelected method in Java file
+    @Override
+    // Pass in selected MenuItem and compare id of item to compose id to handle appropriately
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // If compose icon has been selected
+        if (item.getItemId() == R.id.compose) {
+//            Toast.makeText(this, "Compose!", Toast.LENGTH_SHORT).show();
+            // Navigate to the compose activity from this activity
+            Intent intent = new Intent(this, ComposeActivity.class);
+            // To return data to parent activity
+            startActivityForResult(intent, REQUEST_CODE);
+            return true;
+        }
+        // Launch child (compose) activity
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        // requestCode defined above, ensure same, and data is from child activity
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            // Get data (tweet) from the intent
+            Tweet tweet = Parcels.unwrap(data.getParcelableExtra("tweet"));
+            // Update RecyclerView with tweet
+            tweets.add(0, tweet);
+            adapter.notifyItemInserted(0);
+            rvTweets.smoothScrollToPosition(0);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void populateHomeTimeline() {
