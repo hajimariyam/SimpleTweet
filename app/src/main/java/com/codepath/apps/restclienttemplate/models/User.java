@@ -11,6 +11,7 @@ public class User {
     public String screenName;
     public String profileImageUrl;
 
+    // empty constructor needed by Parceler library
     public User() {}
 
     // method to return User model from Json object

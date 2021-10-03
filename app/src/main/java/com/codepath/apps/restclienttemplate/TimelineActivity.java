@@ -31,6 +31,7 @@ public class TimelineActivity extends AppCompatActivity {
     // tag to keep track of success/failure
     public static final String TAG = "TimelineActivity";
 
+    // to pass into startActivityForResult; any value if unique throughout app
     private final int REQUEST_CODE = 20;
 
     // instance variable to be used in multiple methods
@@ -93,7 +94,7 @@ public class TimelineActivity extends AppCompatActivity {
 //            Toast.makeText(this, "Compose!", Toast.LENGTH_SHORT).show();
             // Navigate to the compose activity from this activity
             Intent intent = new Intent(this, ComposeActivity.class);
-            // To return data to parent activity
+            // Return newly composed tweet data to from child (Compose) to parent (Timeline) activity
             startActivityForResult(intent, REQUEST_CODE);
             return true;
         }
@@ -101,15 +102,19 @@ public class TimelineActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // Check if user has composed new tweet and handle accordingly
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
-        // requestCode defined above, ensure same, and data is from child activity
+        // ensure requestCode is same as defined above, data is from child activity
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-            // Get data (tweet) from the intent
+            // Get data (tweet object) from the intent
             Tweet tweet = Parcels.unwrap(data.getParcelableExtra("tweet"));
             // Update RecyclerView with tweet
+            // Modify data source (list) of tweets
             tweets.add(0, tweet);
+            // Update adapter
             adapter.notifyItemInserted(0);
+            // Scroll to very top
             rvTweets.smoothScrollToPosition(0);
         }
         super.onActivityResult(requestCode, resultCode, data);

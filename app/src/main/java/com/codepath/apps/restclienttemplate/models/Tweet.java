@@ -17,6 +17,7 @@ public class Tweet {
     public String createdAt;
     public User user;
 
+    // empty constructor needed by Parceler library
     public Tweet() {}
 
     // turn JSON object representing tweet into Java Tweet object
