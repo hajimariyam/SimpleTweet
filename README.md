@@ -4,7 +4,7 @@ An Android mobile app—view your Twitter timeline and post a new tweet. The app
 
 ## Video Walkthrough
 
-<img src='gif.gif' title='Video Walkthrough' width='25%' alt='Video Walkthrough' />
+<img src='gif.gif' title='Video Walkthrough' width='35%' alt='Video Walkthrough' />
 
 ## User Stories
 
