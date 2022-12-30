@@ -1,6 +1,10 @@
-# SIMPLETWEET
+# SIMPLE TWEET
 
 An Android mobile app—view your Twitter timeline and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
+
+## Video Walkthrough
+
+<img src='gif.gif' title='Video Walkthrough' width='25%' alt='Video Walkthrough' />
 
 ## User Stories
 
@@ -37,13 +41,6 @@ The following **optional** features are implemented:
 - [ ] User can **open the twitter app offline and see last loaded tweets**. Persisted in SQLite tweets are refreshed on every application launch. While "live data" is displayed when app can get it from Twitter API, it is also saved for use in offline mode.
 - [ ] When a user leaves the compose view without publishing and there is existing text, prompt to save or delete the draft. If saved, the draft should then be **persisted to disk** and can later be resumed from the compose view.
 - [ ] Enable your app to receive implicit intents from other apps. When a link is shared from a web browser, it should pre-fill the text and title of the web page when composing a tweet. 
-
-## Video Walkthrough
-
-Here's a walkthrough of implemented user stories:
-
-<img src='Twitter_Part1.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-<img src='Twitter_Part2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ## Open-source libraries used
 
